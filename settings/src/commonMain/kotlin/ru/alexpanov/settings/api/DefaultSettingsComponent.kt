@@ -15,9 +15,11 @@ class DefaultSettingsComponent(
     dependencies: SettingsDependencies,
     private val onDismiss: () -> Unit
 ) : SettingsComponent, ComponentContext by componentContext {
-    private val module = SettingsModule(dependencies)
 
-    private val feature: SettingsFeature = instanceKeeper.getOrCreate { module.settingsFeature() }
+    private val feature: SettingsFeature = instanceKeeper.getOrCreate {
+        val module = SettingsModule(dependencies)
+        module.settingsFeature
+    }
 
     override val state: AnyStateFlow<RocketSettings> = feature.state.wrapToAny()
 

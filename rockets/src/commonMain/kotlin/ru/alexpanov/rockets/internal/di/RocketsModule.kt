@@ -6,7 +6,7 @@ import ru.alexpanov.rockets.internal.presentation.RocketsFeature
 
 internal class RocketsModule(rocketDependencies: RocketsDependencies) :
     RocketsDependencies by rocketDependencies {
-    fun rocketRepository() = RocketRepository(spaceXApi, rocketsMemoryCache)
+    private val rocketRepository get() = RocketRepository(spaceXApi, rocketsMemoryCache)
 
-    fun rocketsFeature() = RocketsFeature(rocketRepository(), settingsRepository)
+    val rocketsFeature get() = RocketsFeature(rocketRepository, settingsRepository)
 }

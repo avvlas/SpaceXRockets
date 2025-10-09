@@ -7,9 +7,9 @@ import ru.alexpanov.launches.api.data.LaunchesMemoryCache
 import ru.alexpanov.rockets.api.data.RocketsMemoryCache
 
 internal class DataModule : RootModuleDependencies {
-    val json by lazy { JsonProvider().get() }
+    private val json by lazy { JsonProvider().get() }
 
-    val httpClient by lazy { HttpClientProvider(json).get() }
+    private val httpClient by lazy { HttpClientProvider(json).get() }
 
     override val spaceXApi by lazy { DefaultSpaceXApi(httpClient) }
 

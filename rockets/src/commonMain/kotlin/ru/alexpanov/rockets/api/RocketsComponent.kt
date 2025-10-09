@@ -15,9 +15,10 @@ class RocketsComponent(
     private val navigateSettings: () -> Unit,
 ) : Rockets, ComponentContext by componentContext {
 
-    private val module = RocketsModule(dependencies)
-
-    private val feature: RocketsFeature = instanceKeeper.getOrCreate { module.rocketsFeature() }
+    private val feature: RocketsFeature = instanceKeeper.getOrCreate {
+        val module = RocketsModule(dependencies)
+        module.rocketsFeature
+    }
 
     override val state: AnyStateFlow<RocketsUiState> = feature.state
 

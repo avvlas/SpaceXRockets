@@ -5,5 +5,5 @@ import ru.alexpanov.settings.internal.presentation.SettingsFeature
 
 internal class SettingsModule(dependencies: SettingsDependencies) :
     SettingsDependencies by dependencies {
-    fun settingsFeature() = SettingsFeature(settingsRepository)
+    val settingsFeature get() = SettingsFeature(settingsRepository)
 }

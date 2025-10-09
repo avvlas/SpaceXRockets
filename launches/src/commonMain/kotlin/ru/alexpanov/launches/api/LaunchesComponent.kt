@@ -15,9 +15,8 @@ class LaunchesComponent(
     componentContext: ComponentContext
 ) : Launches, ComponentContext by componentContext {
 
-    private val module = LaunchesModule(dependencies)
-
     private val feature: LaunchesFeature = instanceKeeper.getOrCreate {
+        val module = LaunchesModule(dependencies)
         module.launchesFeature(rocketId)
     }
 

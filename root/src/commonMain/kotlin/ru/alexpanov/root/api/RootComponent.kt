@@ -12,6 +12,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
+import com.arkivanov.essenty.instancekeeper.getOrCreateSimple
 import kotlinx.serialization.Serializable
 import ru.alexpanov.launches.api.LaunchesComponent
 import ru.alexpanov.rockets.api.RocketsComponent
@@ -23,7 +24,9 @@ class RootComponent(
     componentContext: ComponentContext
 ) : Root, ComponentContext by componentContext {
 
-    private val rootModule = RootModule(DataModule())
+    private val rootModule = instanceKeeper.getOrCreateSimple {
+        RootModule(DataModule())
+    }
 
     private val navigation = StackNavigation<ScreenConfig>()
 
@@ -101,7 +104,7 @@ class RootComponent(
                     DefaultSettingsComponent(
                         componentContext = componentContext,
                         onDismiss = slotNavigation::dismiss,
-                        dependencies = rootModule
+                        dependencies = rootModule,
                     )
                 )
             }
